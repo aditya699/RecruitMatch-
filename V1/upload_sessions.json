@@ -1,0 +1,23 @@
+[
+  {
+    "timestamp": "2025-04-10 05:34:03",
+    "cv_folder": "None",
+    "jd_folder": "jd_raw_20250410_053358",
+    "jd_count": 2,
+    "db_file": "job_summaries_jd_raw_20250410_053358.db"
+  },
+  {
+    "timestamp": "2025-04-10 05:45:20",
+    "cv_folder": "None",
+    "jd_folder": "jd_raw_20250410_054514",
+    "jd_count": 2,
+    "db_file": "job_summaries_jd_raw_20250410_054514.db"
+  },
+  {
+    "timestamp": "2025-04-10 05:49:30",
+    "cv_folder": "None",
+    "jd_folder": "jd_raw_20250410_054925",
+    "jd_count": 2,
+    "db_file": "job_summaries_jd_raw_20250410_054925.db"
+  }
+]

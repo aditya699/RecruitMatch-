@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} - Search Candidates{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Search Candidates
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Find Matching Candidates by Job Description</h5>
+                <p class="card-text">Enter a job title and description to find matching candidates in the database.</p>
+                
+                <form method="POST" class="mt-4">
+                    <div class="mb-3">
+                        <label for="job_title" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="job_title" name="job_title" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="job_description" class="form-label">Job Description</label>
+                        <textarea class="form-control" id="job_description" name="job_description" rows="6" required></textarea>
+                        <div class="form-text">
+                            Include key skills, qualifications, and responsibilities to improve matching accuracy.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> The system will analyze the job description and find the best matching 
+                            candidates based on skills, qualifications, and experience. This process may take a moment.
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Find Matching Candidates</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

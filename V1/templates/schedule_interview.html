@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} - Schedule Interview{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Schedule Interview
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Schedule Interview for {{ candidate_name }}</h5>
+                <p class="card-text">Send an interview invitation email for the "{{ job_title }}" position.</p>
+                
+                <form method="POST" class="mt-4">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Candidate Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    
+                    <input type="hidden" name="match_score" value="0.85">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Available Interview Dates</label>
+                        <div class="list-group">
+                            {% for date in dates %}
+                                <div class="list-group-item list-group-item-action">
+                                    {{ date }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-text">
+                            These dates will be included in the invitation email for the candidate to choose from.
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> An email will be sent to the candidate with interview details and 
+                            available dates. The candidate will be asked to reply with their preferred date and time.
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{{ url_for('view_matches') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Send Invitation</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

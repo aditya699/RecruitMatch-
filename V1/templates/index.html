@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %} - Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Dashboard
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Welcome to RecruitMatch</h5>
+                <p class="card-text">An intelligent recruitment system for matching candidates to job descriptions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                CV Management
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Upload and Process CVs</h5>
+                <p class="card-text">Upload candidate resumes to analyze skills, experience, and qualifications.</p>
+                <a href="{{ url_for('upload_cv') }}" class="btn btn-primary">Upload CVs</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Job Descriptions
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Upload Job Descriptions</h5>
+                <p class="card-text">Upload job descriptions to find matching candidates.</p>
+                <a href="{{ url_for('upload_jd') }}" class="btn btn-primary">Upload JDs</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Candidate Matches
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">View Matching Candidates</h5>
+                <p class="card-text">Browse top matching candidates for each job and schedule interviews.</p>
+                <a href="{{ url_for('view_matches') }}" class="btn btn-primary">View Matches</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Upload Sessions
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">View Upload Sessions</h5>
+                <p class="card-text">View specific CV and JD upload sessions and their matching results.</p>
+                <a href="{{ url_for('view_sessions') }}" class="btn btn-primary">View Sessions</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Search Candidates
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Search by Job Description</h5>
+                <p class="card-text">Enter a custom job description to find matching candidates in the database.</p>
+                <a href="{{ url_for('search_candidates') }}" class="btn btn-primary">Search Candidates</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

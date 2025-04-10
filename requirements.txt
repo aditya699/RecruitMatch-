@@ -1,0 +1,10 @@
+pypdf
+langchain_community
+pandas
+numpy
+ollama
+scikit-learn
+flask
+streamlit
+matplotlib
+werkzeug

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecruitMatch - Smart Candidate Matching</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --info: #4cc9f0;
+            --warning: #ffaa00;
+            --danger: #d90429;
+            --border-radius: 12px;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            padding-top: 30px;
+            padding-bottom: 60px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1140px;
+        }
+        
+        .brand-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .brand-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-subtitle {
+            font-weight: 300;
+            color: #6c757d;
+        }
+        
+        .card {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            border-color: var(--success);
+        }
+        
+        .btn-success:hover {
+            box-shadow: 0 4px 8px rgba(56, 176, 0, 0.25);
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .alert {
+            border-radius: var(--border-radius);
+            border: none;
+            padding: 1rem;
+        }
+        
+        .alert-info {
+            background-color: rgba(76, 201, 240, 0.15);
+            color: #0c7e9e;
+        }
+        
+        .alert-dismissible .btn-close {
+            padding: 1.1rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        
+        .form-text {
+            color: #718096;
+        }
+        
+        .status-icon {
+            min-width: 32px;
+            min-height: 32px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+        
+        .status-waiting {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+        
+        .status-ready {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .workflow-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .workflow-line {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            width: 2px;
+            height: calc(100% - 160px);
+            background-color: #e2e8f0;
+            z-index: -1;
+        }
+        
+        .workflow-step {
+            background-color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .workflow-step:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .workflow-step.active {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.15);
+        }
+        
+        .workflow-step .number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: 600;
+        }
+        
+        .workflow-step.disabled {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* File upload styling */
+        .file-upload-wrapper {
+            position: relative;
+            border: 2px dashed #e2e8f0;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+            background-color: #f8fafc;
+        }
+        
+        .file-upload-wrapper:hover {
+            border-color: var(--primary);
+        }
+        
+        .file-upload-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .file-upload-text {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        
+        .file-upload-note {
+            font-size: 0.875rem;
+            color: #718096;
+        }
+        
+        .file-upload-input {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="brand-header text-center">
+            <h1 class="brand-title">RecruitMatch <i class="fas fa-handshake"></i></h1>
+            <p class="brand-subtitle">AI-powered candidate matching for your perfect hire</p>
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="row mb-4">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible fade show">
+                                <i class="fas fa-info-circle me-2"></i> {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="workflow-container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="workflow-step active">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="number">1</span>
+                            <h5 class="mb-0">Upload Job Description</h5>
+                        </div>
+                        <form method="POST" action="{{ url_for('upload_jd') }}" enctype="multipart/form-data">
+                            <div class="file-upload-wrapper">
+                                <i class="fas fa-file-csv file-upload-icon"></i>
+                                <div class="file-upload-text">Drag & drop your JD CSV file here</div>
+                                <div class="file-upload-note">Must contain 'Job Title' and 'Job Description' columns</div>
+                                <input class="file-upload-input" type="file" id="jd_file" name="jd_file" accept=".csv" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-upload me-2"></i> Upload JD
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="workflow-step {% if 'jd_path' not in session %}disabled{% endif %}">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="number">2</span>
+                            <h5 class="mb-0">Upload CVs & Match</h5>
+                        </div>
+                        <form method="POST" action="{{ url_for('upload_cv') }}" enctype="multipart/form-data">
+                            <div class="file-upload-wrapper">
+                                <i class="fas fa-file-pdf file-upload-icon"></i>
+                                <div class="file-upload-text">Drag & drop CV PDF files here</div>
+                                <div class="file-upload-note">You can select multiple PDF files</div>
+                                <input class="file-upload-input" type="file" id="cv_files" name="cv_files" accept=".pdf" multiple required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" {% if 'jd_path' not in session %}disabled{% endif %}>
+                                <i class="fas fa-magic me-2"></i> Upload & Match
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-search"></i> Search Existing CV Database
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-4">Already have CVs in the database? Enter a custom job description to find matching candidates.</p>
+                        <a href="{{ url_for('search_candidates') }}" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i> Search Candidates
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Modern file input handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInputs = document.querySelectorAll('.file-upload-input');
+            
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const wrapper = this.closest('.file-upload-wrapper');
+                    const textElement = wrapper.querySelector('.file-upload-text');
+                    
+                    if (this.files.length > 0) {
+                        if (this.files.length === 1) {
+                            textElement.textContent = `Selected: ${this.files[0].name}`;
+                        } else {
+                            textElement.textContent = `Selected ${this.files.length} files`;
+                        }
+                        wrapper.style.borderColor = 'var(--success)';
+                        wrapper.querySelector('.file-upload-icon').style.color = 'var(--success)';
+                    } else {
+                        textElement.textContent = this.id === 'jd_file' ? 
+                            'Drag & drop your JD CSV file here' : 
+                            'Drag & drop CV PDF files here';
+                        wrapper.style.borderColor = '#e2e8f0';
+                        wrapper.querySelector('.file-upload-icon').style.color = 'var(--primary)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

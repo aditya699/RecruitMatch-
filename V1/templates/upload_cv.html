@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %} - Upload CVs{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Upload CVs
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Upload Candidate Resumes</h5>
+                <p class="card-text">Upload PDF files of candidate resumes. You can select multiple files at once.</p>
+                
+                <form method="POST" enctype="multipart/form-data" class="mt-4">
+                    <div class="mb-3">
+                        <label for="cv_file" class="form-label">Select CV Files (PDF only)</label>
+                        <input class="form-control" type="file" id="cv_file" name="cv_file" accept=".pdf" multiple required>
+                        <div class="form-text">You can select multiple PDF files.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> Uploading CVs will automatically process and extract key information including:
+                            <ul>
+                                <li>Contact information</li>
+                                <li>Skills and qualifications</li>
+                                <li>Work experience</li>
+                                <li>Education</li>
+                                <li>Certifications</li>
+                            </ul>
+                            This may take some time depending on the number of files.
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

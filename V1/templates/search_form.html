@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Candidates - RecruitMatch</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #38b000;
+            --info: #4cc9f0;
+            --warning: #ffaa00;
+            --danger: #d90429;
+            --border-radius: 12px;
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            padding-top: 30px;
+            padding-bottom: 60px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1140px;
+        }
+        
+        .brand-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .brand-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand-subtitle {
+            font-weight: 300;
+            color: #6c757d;
+        }
+        
+        .card {
+            border: none;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border-bottom: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+        
+        .alert {
+            border-radius: var(--border-radius);
+            border: none;
+            padding: 1rem;
+        }
+        
+        .alert-info {
+            background-color: rgba(76, 201, 240, 0.15);
+            color: #0c7e9e;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        
+        .form-text {
+            color: #718096;
+        }
+        
+        .back-link {
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            transform: translateX(-3px);
+            color: var(--primary-dark);
+        }
+        
+        .search-icon-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .search-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #a0aec0;
+        }
+        
+        .input-icon input {
+            padding-left: 40px;
+        }
+        
+        .job-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+        
+        .keyword-badge {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .keyword-badge:hover {
+            background-color: rgba(67, 97, 238, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="back-link">
+            <i class="fas fa-arrow-left me-2"></i> Back to Home
+        </a>
+        
+        <div class="text-center mb-4">
+            <h1 class="brand-title">Search Candidates <i class="fas fa-search"></i></h1>
+            <p class="brand-subtitle">Find the best candidates in your database for a specific job</p>
+        </div>
+        
+        <div class="search-icon-container">
+            <div class="search-icon">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="row mb-4">
+                    <div class="col-12">
+                        {% for message in messages %}
+                            <div class="alert alert-info alert-dismissible fade show">
+                                <i class="fas fa-info-circle me-2"></i> {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-briefcase"></i> Enter Job Details
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('search_candidates') }}">
+                            <div class="mb-3">
+                                <label for="job_title" class="form-label">Job Title</label>
+                                <div class="input-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                    <input type="text" class="form-control" id="job_title" name="job_title" placeholder="e.g. Data Scientist, Product Manager" required>
+                                </div>
+                                
+                                <div class="job-keywords">
+                                    <span class="keyword-badge" data-title="Software Engineer">Software Engineer</span>
+                                    <span class="keyword-badge" data-title="Data Scientist">Data Scientist</span>
+                                    <span class="keyword-badge" data-title="Product Manager">Product Manager</span>
+                                    <span class="keyword-badge" data-title="UX Designer">UX Designer</span>
+                                    <span class="keyword-badge" data-title="Marketing Specialist">Marketing Specialist</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="job_description" class="form-label">Job Description</label>
+                                <textarea class="form-control" id="job_description" name="job_description" rows="8" placeholder="Include key skills, qualifications, and responsibilities to improve matching accuracy" required></textarea>
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb me-1"></i> The more detailed the description, the more accurate the matches will be.
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <div class="alert alert-info">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-brain me-2" style="font-size: 1.2rem;"></i>
+                                        <strong>AI-Powered Matching</strong>
+                                    </div>
+                                    The system will analyze the job description using natural language processing and find the best matching candidates based on skills, experience, and qualifications.
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search me-2"></i> Find Matching Candidates
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Quick job title selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const badges = document.querySelectorAll('.keyword-badge');
+            const jobTitleInput = document.getElementById('job_title');
+            
+            badges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    const title = this.getAttribute('data-title');
+                    jobTitleInput.value = title;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

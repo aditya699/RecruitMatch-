@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} - Upload Job Descriptions{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Upload Job Descriptions
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Upload Job Description CSV</h5>
+                <p class="card-text">Upload a CSV file containing job descriptions with at least 'Job Title' and 'Job Description' columns.</p>
+                
+                <form method="POST" enctype="multipart/form-data" class="mt-4">
+                    <div class="mb-3">
+                        <label for="jd_file" class="form-label">Select Job Description CSV File</label>
+                        <input class="form-control" type="file" id="jd_file" name="jd_file" accept=".csv" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> Uploading job descriptions will automatically:
+                            <ul>
+                                <li>Extract required skills, experience, qualifications, and responsibilities</li>
+                                <li>Find matching candidates for each job</li>
+                                <li>Update the match results database</li>
+                            </ul>
+                            This process may take some time.
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
