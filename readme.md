@@ -7,9 +7,6 @@
   <img src="https://img.shields.io/badge/LLaMA-3.1-purple.svg" alt="LLaMA 3.1"/>
 </div>
 
-<p align="center">
-  <img src="docs/recruitMatch_logo.png" alt="RecruitMatch Logo" width="300"/>
-</p>
 
 ## 🚀 Overview
 
